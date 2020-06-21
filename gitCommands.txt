@@ -1,0 +1,99 @@
+git config --list
+git init
+git add .
+git add index.html
+git clone repoadress/url
+git commit
+git commit -m "Commit message"
+git status
+git log
+git log --oneline
+git log -p
+git log --stat
+git log -p --stat
+git log -p -w(ignores white space)
+git show a9rtce3
+git add file1.txt file2.txt file3.txt ....
+For commit message details, git commit (and now write the message in editor, leave a blank line and then write the details)
+git diff (to see uncommitted changes)
+To ignore some files, make a .gitignore file in the directory where .git is present and write the name of the file to be ignored
+To ignore more than one file, eg photos in sample folder, write samples/*.jpg in.gitignore file(usage of regex)
+git tag -a mytagname
+git tag -d mytagname(to delete tag)
+git tag -a v1.2 9fceb02 -m "Message here"
+git checkout branchname
+git branch
+git branch mybranch (creates a branch)
+git branch mybranchname 2f45d3f
+git branch -d side (to delete you must be on another branch)
+git branch -D side (to force delete a branch with unique commits)
+git checkout -b newbranchname (makes a new branch and switches header to it as well)
+git checkout -b newbranchname referencebranch 
+git log --oneline --graph --all (shows all branches)
+git reset --hard HEAD^ (to undo a merge)
+git merge <name to brach to merge in>
+
+---------------------------------------------------------------------------
+For merge conflict resolution, inside editor:
+<<<<<<< HEAD
+	Code on the current brancch
+||||||| 
+	code on the common ancestor branch
+=======
+	code on the branch that is being merged in 
+>>>>>>> NEWBRANCHNAME
+
+Now select which lines to keep and remove all indicators
+
+---------------------------------------------------------------------------
+
+git commit --amend (To change the most recent commit message)
+if some files are to be the added in the latest commit, just add them and then use the above command.
+---------------------------------------------------------------------------
+
+git revert 23drw3f (reverts the changes made in 23drw3f(only specifically this one) commit and makes a new commit)
+
+---------------------------------------------------------------------------
+
+Relative commits:
+^ indicates parent commit
+~ indicates first parent commit
+
+HEAD^ indicates parent commit
+HEAD~ indicates parent commit
+HEAD~1 indicates parent commit
+
+HEAD^^ grandparent commit
+HEAD~2 grandparent commit
+
+HEAD^^^ great-grandparent commit
+HEAD~3 great grandparent commit
+
+Difference between ^ and ~ :
+when there is a commit created from merge, it has 2 parents:
+first parent: the branch on which you were when you ran git merge
+second parent: the branch that was merged in.
+
+^2 is used to indicate second parent and ^ is used to indicate first parent
+---------------------------------------------------------------------------
+
+git reset <refernce to commit>	(rewinds to the given commit and moves all the intermedicate commits to working directory)(default flag is --mixed)
+It can be used to:
+move the HEAD and current branch pointer to the referenced commit
+erase commits
+move committed changes to the staging index
+unstage committed changes
+
+git reset --mixed HEAD^^ (given above)
+
+git reset --soft HEAD^^ (moves intermediate commits to the staging area)
+
+git reset --hard HEAD^^ (moves intermediate commits to trash, can be recovered within 30 days using git reflog)
+
+Note: before hard rest, always make a backup branch
+
+git checkout . (removes all local unstaged changes)
+
+git checkout -- file.txt (removes local unstaged changes in file.txt)
+
+NOTE: when git reset is used, it changes the sha of the commit we returned back to.
